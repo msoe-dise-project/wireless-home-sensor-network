@@ -1,5 +1,5 @@
 /*
-  Sensor logging and transmitting client
+  Sensor logger and transmitter
 
   Reads temperature and humidity sensor readings and sends them to a server over WiFi.
 */
@@ -8,15 +8,7 @@
 #include <WiFiNINA.h>
 #include <Modulino.h>
 
-// SSID of your network
-const char ssid[] = "";
-
-// password of your WPA Network
-const char pass[] = "";
-
-// IP address and port of your data logging service
-const IPAddress SERVER_IP(192, 168, 12, 123);
-const int SERVER_PORT = 2000;
+#include "config.h"
 
 // sensor readings
 float temperatureC;
@@ -28,15 +20,6 @@ float humidity;
 unsigned long lastSendTime = 0;
 unsigned long lastBlinkTime = 0;
 
-// event periods
-const float SEC_TO_MS = 1000; // ms
-const float MIN_TO_SEC = 60; // sec
-const float SEND_PERIOD_MIN = 1; // minutes
-const unsigned long SEND_MIN_ELAPSED_MS = SEND_PERIOD_MIN * MIN_TO_SEC * SEC_TO_MS;
-
-const float BLINK_PERIOD_MS = 1000; // ms
-const unsigned long BLINK_MIN_ELAPSED_MS = BLINK_PERIOD_MS;
-
 // used to flip blink
 int LED_STATE = HIGH;
 
@@ -44,17 +27,9 @@ ModulinoThermo thermo;
 
 WiFiClient client;
 
-const int N_CONNECTION_ATTEMPTS = 5;
-const unsigned long CONNECTION_WAIT_TIME_MS = 3000;
-
 // the MAC address of the WiFi Module
 // used to uniquely identify ourselves to the server
 byte mac[6];                     
-
-// send log data to serial console?
-// needs to be off if you want to use the device
-// without being connected to the computer
-#define DEBUG false
 
 void blink() {
   digitalWrite(LED_BUILTIN, LED_STATE);
