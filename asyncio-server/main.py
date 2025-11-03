@@ -48,7 +48,7 @@ async def handle_conn(db_conn, reader, writer):
             # do something with kv_pairs
             cursor = db_conn.cursor()
             now = dt.datetime.now()
-            kv_pairs["recieved_timestamp"] = now.isoformat()
+            kv_pairs["received_timestamp"] = now.isoformat()
             cursor.execute(INSERT, (now, json.dumps(kv_pairs)))
             db_conn.commit()
             print(kv_pairs)
