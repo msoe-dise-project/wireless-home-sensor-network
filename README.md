@@ -14,7 +14,7 @@ The server logs the readings in a SQLite database.
    $ python3 main.py --host 0.0.0.0 --port 2000 --dbname sensor_readings.sqlite
    ```
 1. Assemble a sensor package and connect to your computer.
-1. Load the sketch in the `client` directory to the device in the Arduino IDE.
+1. Load the sketch in the `temperature-client` directory to the device in the Arduino IDE.
 1. Set `debug` to `true` and put your WiFi's SSID and password and server's IP address and port in the appropriate variables.
 1. Upload the sketch.
 1. Open the serial monitor and check the output of the server.  Wait a few minutes to ensure the device can connect to the server.
